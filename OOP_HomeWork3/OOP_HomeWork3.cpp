@@ -18,9 +18,7 @@ using namespace std;
 int main()
 {
     char* example = new char[125]{ "Hello friend" };
-    String p;
-    p.setString(example);
+    String p(120);
     cout << p.getString();
-    p.~String();
     cout << p.getString();
 }

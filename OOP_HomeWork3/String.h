@@ -5,34 +5,30 @@ using namespace std;
 
 class String
 {
+	
+
 private:
 	int count = 0;
 	int size = 0;
 	char* str = new char[size];
 public:
-	//Два мода создания строки (80 размеров и произвольного размера) Надеюсь, верно понял задание,
-	String(int mode) {
-		if (mode == 1) {
-			String::size = 80;
-			char* buff = new char[80];
-			cout << "Enter a string:\n";
-			gets_s(buff, 81);
-			String::str = buff;
-		}
-		else if (mode == 2) {
-			int size;
-			cout << "Enter a size of string:\n";
-			cin >> size;
-			String::size = size;
-			char* buff = new char[size];
-			cout << "Enter a string:\n";
-			cin.ignore();
-			gets_s(buff, 126);
-			String::str = buff;
-		}
+	//Default constructor
+	String() {
+		String::size = 80;
+		char* buffDef = new char[80];
+		cout << "Enter a string:\n";
+		gets_s(buffDef, 81);
+		String::str = buffDef;
 		count++;
 	}
-	//Строка произвольного размера
+	//Constructor with custom size
+	String(int size) : String() {
+		String::size = size;
+		char* buffDef = new char[size];
+		strcpy_s(buffDef, size + 1, str);
+		String::str = buffDef;
+	}
+	//Custom size string and user's string
 	String(char* str, int size) {
 		String::size = size;
 		char* buff = new char[size];
@@ -40,22 +36,20 @@ public:
 		String::str = buff;
 		count++;
 	}
-	//Деконструктор (Не знаю насколько верно, но надеюсь верно)
+	//Destructor (I don't know how true, but I hope so)
 	~String() {
 		delete[] str;
 	}
 
-
-	String() {}; //Добавил для проверки функций ниже
-	//Возращает кол-во созданных строк
+	//Returns the number of strings created
 	int getCount() {
 		return count;
 	}
-	//Возращает строку
+	//Returns a string
 	char* getString() {
 		return str;
 	}
-	//Задаёт строку
+	//Sets a string
 	void setString(char* str) {
 		String::size = strlen(str);
 		String::str = str;
