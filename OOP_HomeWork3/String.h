@@ -21,9 +21,9 @@ public:
 	}
 	//Default constructor
 	String() {
-		str = new char[80];
+		str = new char[125];
 		cout << "Enter a string:\n";
-		gets_s(str, 81);
+		gets_s(str, 126);
 		count++;
 	}
 	//Constructor with custom size
@@ -36,10 +36,10 @@ public:
 	}
 	//Custom size string and user's string
 	String(char* str, int size) {
-		if (str)
-			delete[]str;
-		str = new char[size];
-		gets_s(str, size + 1);
+		if (this->str)
+			delete[]this->str;
+		this->str = new char[size];
+		this->str = str;
 		count++;
 	}
 	//Destructor (I don't know how true, but I hope so)
@@ -57,11 +57,26 @@ public:
 	}
 	//Sets a string
 	void setString(char* str) {
-		String::size = strlen(str);
 		String::str = str;
 		count++;
 	}
 
+
+	char operator[](int index) {
+		return str[index];
+	}
+	int operator()(char letter) {
+		if (strchr(str, letter)) {
+			for (int i = 0; i < strlen(str); i++) {
+				if (letter == str[i]) {
+					return i;
+					break;
+				}
+			}
+		}
+		else
+			return -1;
+	}
 
 };
 

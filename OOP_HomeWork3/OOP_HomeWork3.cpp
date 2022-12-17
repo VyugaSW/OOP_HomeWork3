@@ -18,7 +18,7 @@ using namespace std;
 int main()
 {
     char* example = new char[125]{ "Hello friend" };
-    String p(120);
-    cout << p.getString();
-    cout << p.getString();
+    String p(example,strlen(example));
+    cout << p[2] << endl;
+    cout << p('e') << endl;
 }
